@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{3B5D59CD-FA80-48A4-8584-218D99C18269}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{7DB7D26D-E72F-4812-ACA4-4BE7BC325CC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventool.Model", "src\backend\Eventool.Model\Eventool.Model.csproj", "{014DCBDD-C85C-4FED-850E-F97EFEB16C14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventool.Api", "src\backend\Eventool.Api\Eventool.Api.csproj", "{4DFE6AC9-56EE-4B68-A201-18282E8605B4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{014DCBDD-C85C-4FED-850E-F97EFEB16C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{014DCBDD-C85C-4FED-850E-F97EFEB16C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{014DCBDD-C85C-4FED-850E-F97EFEB16C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{014DCBDD-C85C-4FED-850E-F97EFEB16C14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DFE6AC9-56EE-4B68-A201-18282E8605B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DFE6AC9-56EE-4B68-A201-18282E8605B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DFE6AC9-56EE-4B68-A201-18282E8605B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DFE6AC9-56EE-4B68-A201-18282E8605B4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7DB7D26D-E72F-4812-ACA4-4BE7BC325CC9} = {3B5D59CD-FA80-48A4-8584-218D99C18269}
+		{014DCBDD-C85C-4FED-850E-F97EFEB16C14} = {7DB7D26D-E72F-4812-ACA4-4BE7BC325CC9}
+		{4DFE6AC9-56EE-4B68-A201-18282E8605B4} = {7DB7D26D-E72F-4812-ACA4-4BE7BC325CC9}
+	EndGlobalSection
+EndGlobal
