@@ -7,9 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8B0B165A-9A8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "backend", "backend", "{A15E1211-430E-4AA9-84AF-7C398C4049FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventool.Model", "src\backend\Eventool.Model\Eventool.Model.csproj", "{BF5F5192-2E39-4BB5-8614-3D350634CE46}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventool.Api", "src\backend\Eventool.Api\Eventool.Api.csproj", "{03B49D58-D64E-4B0A-936D-5D6AF2E685B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventool.Domain", "src\backend\Eventool.Domain\Eventool.Domain.csproj", "{1D2E2215-8C10-42D0-A9F8-CF4D4DBFA7BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventool.Infrastructure", "src\backend\Eventool.Infrastructure\Eventool.Infrastructure.csproj", "{F45685B8-C1C8-44F7-89D0-19520F372905}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventool.Application", "src\backend\Eventool.Application\Eventool.Application.csproj", "{A608ABB3-4EFD-46CC-BB5F-51267A628D68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -20,18 +24,28 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BF5F5192-2E39-4BB5-8614-3D350634CE46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF5F5192-2E39-4BB5-8614-3D350634CE46}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF5F5192-2E39-4BB5-8614-3D350634CE46}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF5F5192-2E39-4BB5-8614-3D350634CE46}.Release|Any CPU.Build.0 = Release|Any CPU
 		{03B49D58-D64E-4B0A-936D-5D6AF2E685B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{03B49D58-D64E-4B0A-936D-5D6AF2E685B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03B49D58-D64E-4B0A-936D-5D6AF2E685B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03B49D58-D64E-4B0A-936D-5D6AF2E685B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D2E2215-8C10-42D0-A9F8-CF4D4DBFA7BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D2E2215-8C10-42D0-A9F8-CF4D4DBFA7BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D2E2215-8C10-42D0-A9F8-CF4D4DBFA7BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D2E2215-8C10-42D0-A9F8-CF4D4DBFA7BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F45685B8-C1C8-44F7-89D0-19520F372905}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F45685B8-C1C8-44F7-89D0-19520F372905}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F45685B8-C1C8-44F7-89D0-19520F372905}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F45685B8-C1C8-44F7-89D0-19520F372905}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A608ABB3-4EFD-46CC-BB5F-51267A628D68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A608ABB3-4EFD-46CC-BB5F-51267A628D68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A608ABB3-4EFD-46CC-BB5F-51267A628D68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A608ABB3-4EFD-46CC-BB5F-51267A628D68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A15E1211-430E-4AA9-84AF-7C398C4049FB} = {8B0B165A-9A8E-47A0-948A-29F38FA572DA}
-		{BF5F5192-2E39-4BB5-8614-3D350634CE46} = {A15E1211-430E-4AA9-84AF-7C398C4049FB}
 		{03B49D58-D64E-4B0A-936D-5D6AF2E685B9} = {A15E1211-430E-4AA9-84AF-7C398C4049FB}
+		{1D2E2215-8C10-42D0-A9F8-CF4D4DBFA7BC} = {A15E1211-430E-4AA9-84AF-7C398C4049FB}
+		{F45685B8-C1C8-44F7-89D0-19520F372905} = {A15E1211-430E-4AA9-84AF-7C398C4049FB}
+		{A608ABB3-4EFD-46CC-BB5F-51267A628D68} = {A15E1211-430E-4AA9-84AF-7C398C4049FB}
 	EndGlobalSection
 EndGlobal

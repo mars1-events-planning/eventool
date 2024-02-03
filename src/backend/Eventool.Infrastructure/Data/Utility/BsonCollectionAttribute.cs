@@ -1,4 +1,4 @@
-namespace Eventool.Model.Persistence;
+namespace Eventool.Infrastructure.Data;
 
 [AttributeUsage(AttributeTargets.Class, Inherited = false)]
 public class BsonCollectionAttribute(string collectionName) : Attribute
