@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4CD3A581
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventool.UnitTests", "src\backend\tests\Eventool.UnitTests\Eventool.UnitTests.csproj", "{22074DC6-E1D4-4E4A-BC41-6035C2FCB3F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventool.Application", "src\backend\Eventool.Application\Eventool.Application.csproj", "{D01AD972-4B25-4193-A37A-BCED92E98AC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,6 +44,10 @@ Global
 		{22074DC6-E1D4-4E4A-BC41-6035C2FCB3F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22074DC6-E1D4-4E4A-BC41-6035C2FCB3F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22074DC6-E1D4-4E4A-BC41-6035C2FCB3F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D01AD972-4B25-4193-A37A-BCED92E98AC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D01AD972-4B25-4193-A37A-BCED92E98AC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D01AD972-4B25-4193-A37A-BCED92E98AC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D01AD972-4B25-4193-A37A-BCED92E98AC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A15E1211-430E-4AA9-84AF-7C398C4049FB} = {8B0B165A-9A8E-47A0-948A-29F38FA572DA}
@@ -50,5 +56,6 @@ Global
 		{13D2E963-FD0B-45F5-8F49-840162F22BB9} = {A15E1211-430E-4AA9-84AF-7C398C4049FB}
 		{4CD3A581-8BC9-4077-80B3-F5D8BF738C2C} = {A15E1211-430E-4AA9-84AF-7C398C4049FB}
 		{22074DC6-E1D4-4E4A-BC41-6035C2FCB3F3} = {4CD3A581-8BC9-4077-80B3-F5D8BF738C2C}
+		{D01AD972-4B25-4193-A37A-BCED92E98AC6} = {A15E1211-430E-4AA9-84AF-7C398C4049FB}
 	EndGlobalSection
 EndGlobal

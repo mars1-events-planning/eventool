@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Eventool.Application\Eventool.Application.csproj" />
     <ProjectReference Include="..\Eventool.Domain\Eventool.Domain.csproj" />
     <ProjectReference Include="..\Eventool.Infrastructure\Eventool.Infrastructure.csproj" />
   </ItemGroup>
