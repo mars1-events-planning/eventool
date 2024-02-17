@@ -1,33 +1,24 @@
-﻿using System.Net.Mail;
-using Eventool.Domain.Abstractions;
+using Eventool.Domain.Common;
 
 namespace Eventool.Domain.Organizers;
 
-public class Organizer : Entity, IAggregateRoot
+public class Organizer : Entity<OrganizerId>, IAggregateRoot
 {
-    public Organizer(
-        Guid id,
-        DateTime createdAtUtc,
-        string fullName,
-        MailAddress email,
-        Password password)
+    public FullName FullName { get; }
+
+    public Credentials Credentials { get; }
+
+    private Organizer(
+        OrganizerId id,
+        FullName fullName,
+        Credentials credentials) : base(id)
     {
-        Id = id;
-        CreatedAtUtc = createdAtUtc;
         FullName = fullName;
-        Email = email;
-        Password = password;
+        Credentials = credentials;
     }
 
-    public DateTime CreatedAtUtc { get; private set; }
-
-    public string FullName { get; private set; }
-
-    public Uri? PictureUri { get; init; }
-
-    public MailAddress Email { get; private set; }
-
-    public Password Password { get; private set; }
-
-    public ContactsList Contacts { get; } = [];
+    public static Result<Organizer> Create(
+        OrganizerId id,
+        FullName fullName,
+        Credentials credentials) => new Organizer(id, fullName, credentials);
 }
