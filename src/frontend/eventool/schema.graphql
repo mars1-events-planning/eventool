@@ -1,0 +1,143 @@
+enum ApplyPolicy {
+  AFTER_RESOLVER
+  BEFORE_RESOLVER
+  VALIDATION
+}
+
+union ChangePasswordError = ValidationError | WrongPasswordError
+
+input ChangePasswordInput {
+  newPassword: String!
+  oldPassword: String!
+}
+
+type ChangePasswordPayload {
+  errors: [ChangePasswordError!]
+  organizer: Organizer
+}
+
+union CreateEventError = ValidationError
+
+input CreateEventInput {
+  title: String!
+}
+
+type CreateEventPayload {
+  errors: [CreateEventError!]
+  gqlEvent: GqlEvent
+}
+
+"""The `DateTime` scalar represents an ISO-8601 compliant date time type."""
+scalar DateTime
+
+union EditOrganizerError = ValidationError
+
+input EditOrganizerInput {
+  fullName: String
+  username: String
+}
+
+type EditOrganizerPayload {
+  errors: [EditOrganizerError!]
+  organizer: Organizer
+}
+
+interface Error {
+  message: String!
+}
+
+type GqlEvent {
+  changedAt: DateTime!
+  createdAt: DateTime!
+  creator: Organizer!
+  id: UUID!
+  title: String!
+}
+
+type GqlToken {
+  token: String!
+}
+
+type KeyValuePairOfStringAndObject {
+  key: String!
+}
+
+union LoginError = UserNameShouldBeFilledError | UserNotFoundByUsernameError | WrongPasswordError
+
+input LoginInput {
+  password: String!
+  username: String!
+}
+
+type LoginPayload {
+  errors: [LoginError!]
+  gqlToken: GqlToken
+}
+
+type Mutation {
+  changePassword(input: ChangePasswordInput!): ChangePasswordPayload!
+  createEvent(input: CreateEventInput!): CreateEventPayload!
+  editOrganizer(input: EditOrganizerInput!): EditOrganizerPayload!
+  login(input: LoginInput!): LoginPayload!
+  registerOrganizer(input: RegisterOrganizerInput!): RegisterOrganizerPayload!
+}
+
+type Organizer {
+  fullname: String!
+  id: String!
+  username: String!
+}
+
+type Query {
+  authorized: Boolean!
+  event(eventId: String!): GqlEvent
+  events(page: Int!): [GqlEvent!]!
+  organizer: Organizer
+  organizerByUsername(username: String!): Organizer
+}
+
+union RegisterOrganizerError = ValidationError
+
+input RegisterOrganizerInput {
+  fullName: String!
+  password: String!
+  username: String!
+}
+
+type RegisterOrganizerPayload {
+  errors: [RegisterOrganizerError!]
+  organizer: Organizer
+}
+
+enum Severity {
+  ERROR
+  INFO
+  WARNING
+}
+
+scalar UUID
+
+type UserNameShouldBeFilledError implements Error {
+  message: String!
+}
+
+type UserNotFoundByUsernameError implements Error {
+  message: String!
+}
+
+type ValidationError implements Error {
+  errors: [ValidationFailure]
+  message: String!
+}
+
+type ValidationFailure {
+  errorCode: String
+  errorMessage: String
+  formattedMessagePlaceholderValues: [KeyValuePairOfStringAndObject!]
+  propertyName: String
+  severity: Severity!
+}
+
+type WrongPasswordError implements Error {
+  message: String!
+}

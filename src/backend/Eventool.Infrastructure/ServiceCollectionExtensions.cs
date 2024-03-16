@@ -1,4 +1,6 @@
+using Eventool.Domain.Organizers;
 using Eventool.Infrastructure.Persistence;
+using Eventool.Infrastructure.Utility;
 using Marten;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,10 +10,12 @@ namespace Eventool.Infrastructure;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddInfrastructure(
+    public static IServiceCollection AddInfrastructureLayer(
         this IServiceCollection serviceCollection,
         IConfiguration configuration) =>
-        serviceCollection.AddPersistence(configuration);
+        serviceCollection
+            .AddPersistence(configuration)
+            .AddTransient<IAuthenticationTokenGenerator, JwtGenerator>();
 
     private static IServiceCollection AddPersistence(
         this IServiceCollection serviceCollection,
@@ -20,6 +24,7 @@ public static class ServiceCollectionExtensions
             .AddMarten(options =>
             {
                 options.Connection(configuration.GetConnectionString("Database")!);
+                options.AutoCreateSchemaObjects = AutoCreate.All;
                 options.DatabaseSchemaName = "eventool";
                 options.UseDefaultSerialization(casing: Casing.SnakeCase, enumStorage: EnumStorage.AsString);
             })

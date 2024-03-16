@@ -1,24 +1,31 @@
 version: '3.8'
 
+// traefik that maps graphql requests to backend and other requests to frontend
 services:
-  mongo:
-    image: mongo:latest
-    container_name: mongodb
+  traefik:
+    image: "traefik:v2.2"
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
     ports:
-      - '27017:27017'
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INITDB_DATABASE: eventool
+      - "80:80"
+      - "8080:8080"
     volumes:
-      - mongodb_data:/data/db
-    networks:
-      - mongo-net
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
 
-networks:
-  mongo-net:
-    driver: bridge
+  backend:
+    image: "backend:latest"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=Host(`backend.localhost`)"
+      - "traefik.http.services.backend.loadbalancer.server.port=4000"
 
-volumes:
-  mongodb_data:
-    driver: local
+  frontend:
+    image: "frontend:latest"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=Host(`frontend.localhost`)"
+      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
+``` 

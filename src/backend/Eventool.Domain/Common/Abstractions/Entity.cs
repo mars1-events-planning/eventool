@@ -1,8 +1,7 @@
 namespace Eventool.Domain.Common;
 
-
 public class Entity<TId>(TId id)
-    where TId : ValueObject
+    where TId : struct
 {
     public TId Id { get; } = id;
 
@@ -29,5 +28,5 @@ public class Entity<TId>(TId id)
 
     public override int GetHashCode() => Id.GetHashCode();
 
-    public override string ToString() => $"{GetType().Name} -> [Id: {Id}]";
+    public override string ToString() => $"{GetType().Name} [Id: {Id}]";
 }
