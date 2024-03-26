@@ -26,7 +26,10 @@ public static class ServiceCollectionExtensions
                 options.Connection(configuration.GetConnectionString("Database")!);
                 options.AutoCreateSchemaObjects = AutoCreate.All;
                 options.DatabaseSchemaName = "eventool";
-                options.UseDefaultSerialization(casing: Casing.SnakeCase, enumStorage: EnumStorage.AsString);
+                options.UseDefaultSerialization(
+                    casing: Casing.SnakeCase, 
+                    enumStorage: EnumStorage.AsString,
+                    collectionStorage: CollectionStorage.AsArray);
             })
             .OptimizeArtifactWorkflow()
             .Services

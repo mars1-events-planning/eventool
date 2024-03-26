@@ -5,14 +5,15 @@
 	import { formatDateString } from '$lib/utils';
 	import Trash from '$lib/components/icons/Trash.svelte';
 	import Preloader from '$lib/components/icons/Preloader.svelte';
+	import Create from '$lib/components/icons/Create.svelte';
 
 	const eventsStore = graphql(`
 		query PaginatedEvents($page: Int!) {
 			events(page: $page) {
 				id
 				title
-				createdAt
-				changedAt
+				createdAtUtc
+				changedAtUtc
 			}
 		}
 	`);
@@ -38,23 +39,27 @@
 </svelte:head>
 
 <Authorized>
-	<div class="divider divider-primary">Список мероприятий</div>
-	<div class="flex flex-col gap-2">
+	<div class="flex flex-col gap-2 max-lg:items-center">
+		<h1 class="font-semibold text-xl">Список событий</h1>
 		<div class="overflow-x-auto max-h-[70vh] rounded-md border border-base-content/30">
-			<table id="custom" class="table table-pin-cols table-pin-rows max-h-36">
+			<table id="custom" class="table max-h-36">
 				<thead class="">
 					<tr class="shadow-md">
 						<th>Название</th>
 						<th>Последнее редактирование</th>
 						<th class="flex flex-row justify-end space-x-2">
-							<CreateEventModal />
+							<CreateEventModal>
+								<div class="btn btn-primary btn-sm">
+									<Create size={20} />
+								</div>
+							</CreateEventModal>
 						</th>
 					</tr>
 				</thead>
 				<tbody>
 					{#each events as e}
-						{@const createdAt = formatDateString(e.createdAt)}
-						{@const changedAt = formatDateString(e.changedAt)}
+						{@const createdAt = formatDateString(e.createdAtUtc)}
+						{@const changedAt = formatDateString(e.changedAtUtc)}
 						<tr>
 							<td>
 								<a href={`/event/${e.id}/edit`}>

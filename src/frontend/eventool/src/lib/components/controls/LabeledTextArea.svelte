@@ -4,7 +4,6 @@
 		name: string;
 		value: string;
 		label: string | undefined;
-		type: 'text' | 'password' | 'number' | 'date' | 'time';
 		labelClass: string | '';
 		inputClass: string | '';
 	}>();
@@ -16,10 +15,9 @@
     {props.label}
 </label>
 {/if}
-<input
+<textarea
 	id={props.id}
 	name={props.name}
-	type={props.type}
 	bind:value={value}
 	class={`input ${props.inputClass}`}
 />

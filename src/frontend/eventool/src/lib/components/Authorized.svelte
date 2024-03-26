@@ -1,4 +1,3 @@
-
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import Preloader from '$lib/components/icons/Preloader.svelte';
@@ -15,11 +14,13 @@
 	let p = async () => {
 		let data = await authorizedStore.fetch();
 
-		if (data.data?.authorized === false) {
-			await goto('/error');
+		if (data.data?.authorized === true) {
+			authorized = true;
 			return;
 		}
-		authorized = true
+
+		authorized = false;
+		await goto('/error');
 	};
 </script>
 

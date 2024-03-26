@@ -2,10 +2,11 @@ using System.Security.Claims;
 using Eventool.Api.GraphQL.Schema.Events.OutputTypes;
 using Eventool.Api.GraphQL.Schema.Utility;
 using Eventool.Application.UseCases;
-using Eventool.Domain.Organizers;
+using Eventool.Domain.Events;
 using Eventool.Infrastructure.Utility;
 using HotChocolate.Authorization;
 using MediatR;
+using UnauthorizedAccessException = Eventool.Application.UseCases.UnauthorizedAccessException;
 using ValidationException = FluentValidation.ValidationException;
 
 namespace Eventool.Api.GraphQL.Schema;
@@ -106,6 +107,61 @@ public class RootMutation
 
         var @event = await mediator.Send(
             new CreateEventCommand(title, guid),
+            cancellationToken);
+
+        return new GqlEvent(@event);
+    }
+    
+    [Authorize]
+    [GraphQLName("editEvent")]
+    [Error<ValidationException>]
+    [Error<UnauthorizedAccessException>]
+    public async Task<GqlEvent> EditEventAsync(
+        [Service] IMediator mediator,
+        ClaimsPrincipal claimsPrincipal,
+        CancellationToken cancellationToken,
+        Guid eventId,
+        string title,
+        string? address = null,
+        string? description = null,
+        DateTime? startDateTimeUtc = null)
+    {
+        var organizerId = claimsPrincipal
+            .Claims
+            .Single(x => x.Type == JwtClaims.OrganizerId)
+            .Value;
+
+        var guid = Guid.Parse(organizerId);
+        
+        var @event = await mediator.Send(
+            new EditEventRequest(eventId, guid, title, address, description, startDateTimeUtc),
+            cancellationToken);
+
+        return new GqlEvent(@event);
+    }
+    
+    [Authorize]
+    [GraphQLName("saveChecklist")]
+    [Error<ValidationException>]
+    [Error<UnauthorizedAccessException>]
+    public async Task<GqlEvent> SaveChecklistAsync(
+        [Service] IMediator mediator,
+        ClaimsPrincipal claimsPrincipal,
+        CancellationToken cancellationToken,
+        Guid eventId,
+        string title,
+        IEnumerable<ChecklistItem> items,
+        Guid? checklistId = null)
+    {
+        var organizerId = claimsPrincipal
+            .Claims
+            .Single(x => x.Type == JwtClaims.OrganizerId)
+            .Value;
+
+        var guid = Guid.Parse(organizerId);
+        
+        var @event = await mediator.Send(
+            new SaveChecklistRequest(eventId, guid, title, items, checklistId),
             cancellationToken);
 
         return new GqlEvent(@event);

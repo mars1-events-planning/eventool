@@ -18,15 +18,13 @@ public class ChecklistDocument : IDocument<ChecklistDocument, Checklist>
     {
         Id = domainObject.Id,
         Title = domainObject.Title,
-        Description = domainObject.Description,
         ChecklistItems = domainObject.ChecklistItems.Select(ChecklistItemDocument.Create)
     };
 
     public Checklist ToDomainObject()
     {
-        var checklist = new Checklist(Id, Title, Description);
-        foreach (var item in ChecklistItems.Select(x => x.ToDomainObject()))
-            checklist.AddChecklistItem(item);
+        var checklist = new Checklist(Id, Title);
+        checklist.SetItems(ChecklistItems.Select(x => x.ToDomainObject()));
 
         return checklist;
     }

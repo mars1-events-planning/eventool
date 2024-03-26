@@ -2,7 +2,7 @@ namespace Eventool.Domain.Events;
 
 public interface IEventRepository
 {
-    public Event Create(Event @event);
+    public Event Save(Event @event);
 
     public Task<IEnumerable<Event>> GetListByCreatorIdAsync(Guid creatorId, int pageNumber, CancellationToken ct);
 

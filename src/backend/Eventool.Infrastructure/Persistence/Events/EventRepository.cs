@@ -9,8 +9,9 @@ public class EventRepository(IDocumentSession session)
 {
     private const int PageSize = 15;
 
-    public Event Create(Event @event)
+    public Event Save(Event @event)
     {
+        @event.Changed();
         Session.Store(EventDocument.Create(@event));
         return @event;
     }
@@ -19,7 +20,7 @@ public class EventRepository(IDocumentSession session)
         (await Session
             .Query<EventDocument>()
             .Where(document => document.CreatorId == creatorId)
-            .OrderByDescending(x => x.ChangedAt)
+            .OrderByDescending(x => x.ChangedAtUtc)
             .ToPagedListAsync(pageNumber, PageSize, ct))
         .Select(document => document.ToDomainObject());
 

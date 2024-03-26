@@ -25,9 +25,9 @@
 	`);
 </script>
 
-<Modal title="Создать мероприятие" buttonClasses="btn-primary btn-sm">
+<Modal title="Создать мероприятие">
 	<div slot="button">
-		<Create size={20} />
+		<slot />
 	</div>
 
 	<form slot="content" class="grid grid-cols-5 gap-2">

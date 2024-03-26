@@ -1,31 +1,12 @@
-version: '3.8'
+version: '3.1'
 
-// traefik that maps graphql requests to backend and other requests to frontend
 services:
-  traefik:
-    image: "traefik:v2.2"
-    command:
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: eventool
     ports:
-      - "80:80"
-      - "8080:8080"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock:ro"
-
-  backend:
-    image: "backend:latest"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.backend.rule=Host(`backend.localhost`)"
-      - "traefik.http.services.backend.loadbalancer.server.port=4000"
-
-  frontend:
-    image: "frontend:latest"
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.frontend.rule=Host(`frontend.localhost`)"
-      - "traefik.http.services.frontend.loadbalancer.server.port=3000"
-``` 
+      - 5432:5432

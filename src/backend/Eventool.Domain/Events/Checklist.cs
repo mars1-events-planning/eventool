@@ -2,13 +2,17 @@ using Eventool.Domain.Common;
 
 namespace Eventool.Domain.Events;
 
-public class Checklist(Guid id, string Title, string Description) : Entity<Guid>(id)
+public record ChecklistItem(string Title, bool Done);
+
+public class Checklist(Guid id, string title) : Entity<Guid>(id)
 {
-    private readonly List<ChecklistItem> _checklistItems = [];
+    private List<ChecklistItem> _checklistItems = [];
+    
+    public string Title { get; private set; } = title;
 
     public IReadOnlyList<ChecklistItem> ChecklistItems => _checklistItems.AsReadOnly();
 
-    public void AddChecklistItem(ChecklistItem checklistItem) => _checklistItems.Add(checklistItem);
-
-    public void RemoveChecklistItem(ChecklistItem checklistItem) => _checklistItems.Remove(checklistItem);
+    public void SetItems(IEnumerable<ChecklistItem> checklistItems) => _checklistItems = checklistItems.ToList();
+    
+    public void SetTitle(string title) => Title = title;
 }

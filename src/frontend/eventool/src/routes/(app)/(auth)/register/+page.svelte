@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { goto } from '$app/navigation';
 	import { graphql } from '$houdini';
 	import LabeledInput from '$lib/components/controls/LabeledInput.svelte';
@@ -61,7 +61,7 @@
 			<div></div>
 			<div class="col-span-4">
 				<ValidationErrorsList
-					errors={validationErrors?.filter((x) => x?.propertyName == 'FullName')}
+					errors={validationErrors?.filter((x) => x?.propertyName === 'FullName')}
 				/>
 			</div>
 

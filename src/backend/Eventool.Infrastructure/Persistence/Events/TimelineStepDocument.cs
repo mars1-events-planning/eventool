@@ -12,6 +12,10 @@ public class TimelineStepDocument : IDocument<TimelineStepDocument, TimelineStep
 
     [JsonProperty("description")] public string Description { get; set; } = null!;
 
+    [JsonProperty("address")] public string Address { get; set; } = null!;
+    
+    [JsonProperty("happens_at")] public DateTime HappensAt { get; set; }
+
     [JsonProperty("checklists")] public IEnumerable<ChecklistDocument> Checklists { get; set; } = [];
 
     public static TimelineStepDocument Create(TimelineStep domainObject) => new()
@@ -24,7 +28,7 @@ public class TimelineStepDocument : IDocument<TimelineStepDocument, TimelineStep
 
     public TimelineStep ToDomainObject()
     {
-        var step = new TimelineStep(Id, Title, Description);
+        var step = new TimelineStep(Id, Title) { Description = Description };
         foreach (var checklist in Checklists.Select(x => x.ToDomainObject()))
             step.AddChecklist(checklist);
 

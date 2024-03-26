@@ -16,6 +16,11 @@ type ChangePasswordPayload {
   organizer: Organizer
 }
 
+input ChecklistItemInput {
+  done: Boolean!
+  title: String!
+}
+
 union CreateEventError = ValidationError
 
 input CreateEventInput {
@@ -29,6 +34,21 @@ type CreateEventPayload {
 
 """The `DateTime` scalar represents an ISO-8601 compliant date time type."""
 scalar DateTime
+
+union EditEventError = UnauthorizedAccessError | ValidationError
+
+input EditEventInput {
+  address: String
+  description: String
+  eventId: UUID!
+  startDateTimeUtc: DateTime
+  title: String!
+}
+
+type EditEventPayload {
+  errors: [EditEventError!]
+  gqlEvent: GqlEvent
+}
 
 union EditOrganizerError = ValidationError
 
@@ -46,11 +66,26 @@ interface Error {
   message: String!
 }
 
-type GqlEvent {
-  changedAt: DateTime!
-  createdAt: DateTime!
-  creator: Organizer!
+type GqlChecklist {
   id: UUID!
+  items: [GqlChecklistItem!]!
+  title: String!
+}
+
+type GqlChecklistItem {
+  done: Boolean!
+  title: String!
+}
+
+type GqlEvent {
+  address: String
+  changedAtUtc: DateTime!
+  checklists: [GqlChecklist!]!
+  createdAtUtc: DateTime!
+  creator: Organizer!
+  description: String
+  id: UUID!
+  startAtUtc: DateTime
   title: String!
 }
 
@@ -77,9 +112,11 @@ type LoginPayload {
 type Mutation {
   changePassword(input: ChangePasswordInput!): ChangePasswordPayload!
   createEvent(input: CreateEventInput!): CreateEventPayload!
+  editEvent(input: EditEventInput!): EditEventPayload!
   editOrganizer(input: EditOrganizerInput!): EditOrganizerPayload!
   login(input: LoginInput!): LoginPayload!
   registerOrganizer(input: RegisterOrganizerInput!): RegisterOrganizerPayload!
+  saveChecklist(input: SaveChecklistInput!): SaveChecklistPayload!
 }
 
 type Organizer {
@@ -109,6 +146,20 @@ type RegisterOrganizerPayload {
   organizer: Organizer
 }
 
+union SaveChecklistError = UnauthorizedAccessError | ValidationError
+
+input SaveChecklistInput {
+  checklistId: UUID
+  eventId: UUID!
+  items: [ChecklistItemInput!]!
+  title: String!
+}
+
+type SaveChecklistPayload {
+  errors: [SaveChecklistError!]
+  gqlEvent: GqlEvent
+}
+
 enum Severity {
   ERROR
   INFO
@@ -116,6 +167,10 @@ enum Severity {
 }
 
 scalar UUID
+
+type UnauthorizedAccessError implements Error {
+  message: String!
+}
 
 type UserNameShouldBeFilledError implements Error {
   message: String!

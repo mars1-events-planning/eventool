@@ -13,7 +13,7 @@
 	<div class="flex flex-col text-red-500 text-sm">
 		<ol class="list-decimal">
 			{#each errors as error}
-				<li>{error?.errorMessage}</li>
+				<li class="max-w-fit break-words">{error?.errorMessage}</li>
 			{/each}
 		</ol>
 	</div>
