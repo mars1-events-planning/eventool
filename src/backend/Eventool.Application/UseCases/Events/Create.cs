@@ -21,7 +21,7 @@ public class CreateEventHandler(
             await validator.ValidateAndThrowAsync(request, cancellationToken);
             await repositories.OrganizersRepository.EnsureOrganizerExistsAsync(request.CreatorId, cancellationToken);
             
-            var @event = new Event(Guid.NewGuid(), request.CreatorId, DateTime.Now, request.Title);
+            var @event = new Event(Guid.NewGuid(), request.CreatorId, DateTime.UtcNow, request.Title);
             return repositories.EventRepository.Create(@event);
         }, cancellationToken);
 }
